@@ -1,10 +1,10 @@
-var appCacheName = 'currency-converter';
+var appCacheName = 'adisco4420.github.io';
 var appCacheAssets = [
-	'https://adisco4420.github.io/currency-converter/',
-	'https://adisco4420.github.io/currency-converter/css/main.css',
-	'https://adisco4420.github.io/currency-converter/script/main.js',
-	'https://adisco4420.github.io/currency-converter/img/icon.png',
-	'https://adisco4420.github.io/currency-converter/package.json',
+	'https://adisco4420.github.io/adisco4420.github.io/',
+	'https://adisco4420.github.io/adisco4420.github.io/css/main.css',
+	'https://adisco4420.github.io/adisco4420.github.io/script/main.js',
+	'https://adisco4420.github.io/adisco4420.github.io/img/icon.png',
+	'https://adisco4420.github.io/adisco4420.github.io/package.json',
 	'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css',
 	'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
 	'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js',

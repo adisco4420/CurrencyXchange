@@ -59,7 +59,7 @@ if (!window.indexedDB) {
 }
 
 function openDatabase(){
-	const DB_NAME 	= 'currency-converter';
+	const DB_NAME 	= 'CurrencyXchange';
 	const database 	= indexedDB.open(DB_NAME, 1);
 
 	database.onerror = (event) => {

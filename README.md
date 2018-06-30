@@ -2,7 +2,7 @@
 
 This currency tconverter work when there is internet access and when there is no internet access (online and offline)
 
-View the demo of the app [CurrencyXchange](https://adisco4420.github.io/adisco4420.github.io/)
+View the demo of the app [CurrencyXchange](https://adisco4420.github.io/CurrencyXchange/)
 
 ### to use the website
 

@@ -1,0 +1,21 @@
+.main-panel{
+    margin-top:200px;
+
+}
+div .row{
+    padding: 10px;
+}
+.header{
+     background-color: darkblue;
+     color: white;
+     font-weight: bold;
+}
+.panel{
+    border: 1px solid black;
+}
+.result{
+    background-color: green;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+}

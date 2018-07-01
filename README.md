@@ -7,6 +7,9 @@ View the demo of the app [CurrencyXchange](https://adisco4420.github.io/Currency
 ### to use the website
 
 select the currencies you want to convert to and input your amount
+# Screenshots
+
+<img src="currency.PNG" alt="HomePage" width="800" height="600">&nbsp;
 
 ## This app consist of the following for offline use:
 - Services Worker

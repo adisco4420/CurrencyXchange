@@ -73,6 +73,7 @@ function openDatabase(){
 	  	var objectStore = upgradeDB.createObjectStore("currencies");
 	};
 	return database;
+	
 }
 function saveToDatabase(data){
 	const db = openDatabase();
@@ -80,16 +81,18 @@ function saveToDatabase(data){
 	db.onsuccess = (event) => {
 		const query = event.target.result;
 		const currency = query.transaction("currencies").objectStore("currencies").get(data.symbol);
-
+		
 	  	currency.onsuccess = (event) => {
 	  		const dbData = event.target.result;
 	  		const store  = query.transaction("currencies", "readwrite").objectStore("currencies");
-
-	  		if(!dbData){ 
+			  if(!dbData){ 
 				store.add(data, data.symbol);
+				
+				
 	  		}else{
 				store.put(data, data.symbol);
-	  		};
+				
+			}
 	  	}
 	}
 }
@@ -101,23 +104,26 @@ function fetchFromDatabase(symbol, amount) {
 		const query = event.target.result;
 		const currency = query.transaction("currencies").objectStore("currencies").get(symbol);
 	  	currency.onsuccess = (event) => {
-	  		const data = event.target.result;
-	  		if(data == null){
-	  			$(".er_msg").append(`
-					<div class="row">
-		                <button class="btn btn-danger">
-		                	No network you are offline 
-		                </button>
-					</div>
-				`);
-				setTimeout((e) => {
-					$(".er_msg").html("");
-				}, 2000);
-				return false;
-	  		}
+			  const data = event.target.result;
+			  
+	   if(data == null){
+				$(".er_msg").append(`
+					<span class=" btn-danger">
+						No network you are offline 
+					</span>
+			`);
+			
+			setTimeout((e) => {
+				$(".er_msg").html("");
+			}, 2000);
+			return ;
+
+			  }
 	  	}
 	}
 }
+
+
 
 //fetch api
 
@@ -156,35 +162,56 @@ function convertCurrency(){
     
     var use1 = dif_from+'_'+dif_to;
     var use = from+'_'+to
-    console.log(use);  
+    //console.log(use);  
     if(from.length >0 && to.length >0 && amount.length>0  ){
+		if (dif_from == dif_to){
+			console.log('cant covert ');
+			
+			$(".er_msg").html(`
+			
+				<span class="text-danger text-center">
+					you cant convert the same currency
+				</span>
+		`);
+		setTimeout((e) => {
+			$(".er_msg").html("");
+		}, 4000);
+
+		return false
+
+		}
         var xHttp = new XMLHttpRequest()
         xHttp.onreadystatechange = function(){
-            if(xHttp.readyState==4 && xHttp.status==200){
-                var obj = JSON.parse(this.responseText);
-                var fact = obj.results[use1];  
-                
-                console.log(fact);
-                fact = fact.val
-                 //console.log(fact)
-                // console.log(use);
-                if(fact!=undefined){
-                    result.innerHTML = parseFloat(amount)*parseFloat(fact);
-                    symbol.innerHTML = dif_to
-                }
-                let object = {
-                    symbol: use,
-                    value: fact
-                };
-                saveToDatabase(object);
-            }else{
-                fetchFromDatabase(use, amount);
-            }
-            return false;
+
+            if(xHttp.readyState==4){
+				if(xHttp.status >=200 && xHttp.status < 304){
+					var obj = JSON.parse(this.responseText);
+					var fact = obj.results[use1];  
+					fact = fact.val
+						result.innerHTML = parseFloat(amount)*parseFloat(fact);
+						symbol.innerHTML = dif_to
+				   
+					let object = {
+						symbol: use1,
+						value: fact.val
+					};
+				saveToDatabase(object);
+				console.log('network is ok');
+				}else {
+					console.log('no network');
+					fetchFromDatabase(use1, amount);
+				}
+      
+				
+			}
+			
         }
         xHttp.open('GET', 'https://free.currencyconverterapi.com/api/v5/convert?q='+dif_from+'_'+dif_to, true)
-        xHttp.send();
-    }
+		xHttp.send();
+		
+	}
+	return false;
+	
 }
 
 // refresh page
